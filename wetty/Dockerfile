@@ -1,5 +1,11 @@
+FROM golang as builder
+
+ENV CGO_ENABLED 0
+
+RUN go install github.com/maxmcd/webtty@latest
+
 FROM ghcr.io/mastodon/mastodon
 
-RUN yarn global add wetty
+COPY --from=builder /go/bin/webtty /webtty
 
-CMD ["bash","-c","wetty -p $PROT --ssh-pass $SSH_PASS"]
+CMD ["/webtty", "-o"]
