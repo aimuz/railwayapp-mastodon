@@ -1,3 +1,3 @@
-FROM lscr.io/linuxserver/mastodon:latest
+FROM ghcr.io/mastodon/mastodon
 
 CMD ["bundle exec sidekiq"]
